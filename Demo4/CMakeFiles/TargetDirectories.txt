@@ -1,0 +1,6 @@
+/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/CMakeFiles/rebuild_cache.dir
+/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/CMakeFiles/edit_cache.dir
+/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/CMakeFiles/app.dir
+/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/math/CMakeFiles/rebuild_cache.dir
+/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/math/CMakeFiles/edit_cache.dir
+/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/math/CMakeFiles/libmath.dir

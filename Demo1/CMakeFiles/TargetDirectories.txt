@@ -1,0 +1,3 @@
+/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo1/CMakeFiles/rebuild_cache.dir
+/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo1/CMakeFiles/edit_cache.dir
+/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo1/CMakeFiles/app.dir

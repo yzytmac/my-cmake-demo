@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo2/MathFunction.h
+
+/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo2/main.c
+stdio.h
+-
+stdlib.h
+-
+MathFunction.h
+/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo2/MathFunction.h
+
