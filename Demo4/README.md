@@ -30,3 +30,4 @@ add_executable(app ${SRCS} ${SRCS2})
 target_link_libraries(app libmath)
 ```
 
+3. 然后在根目录中执行cmake就会连同字目录中的一起执行
