@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/math/MathFunction.c" "/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/math/CMakeFiles/libmath.dir/MathFunction.c.o"
+  "/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/math/MathFunction.c" "/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/build/math/CMakeFiles/libmath.dir/MathFunction.c.o"
   )
 set(CMAKE_C_COMPILER_ID "Clang")
 

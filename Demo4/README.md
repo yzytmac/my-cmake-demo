@@ -31,3 +31,12 @@ target_link_libraries(app libmath)
 ```
 
 3. 然后在根目录中执行cmake就会连同字目录中的一起执行
+4. 外部构建  
+    因为直接在工程里面cmake . 会产生很多中间文件,但又不方便清理,所以建议使用外部构建,即创建一个目录,在该目录内部cmake,如:
+    ```bash
+    cd Demo4
+    mkdir build
+    cd build
+    cmake ../.
+    ```
+    这样产生的中间文件就全在这里面,就方便管理

@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/math/cmake_install.cmake")
+  include("/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/build/math/cmake_install.cmake")
 
 endif()
 
@@ -46,5 +46,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

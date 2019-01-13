@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/build")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)

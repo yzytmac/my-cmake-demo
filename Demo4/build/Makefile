@@ -51,7 +51,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4
+CMAKE_BINARY_DIR = /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4 && $(CMAKE_COMMAND) -E cmake_progress_start /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/CMakeFiles /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/math/CMakeFiles/progress.marks
-	cd /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4 && $(MAKE) -f CMakeFiles/Makefile2 math/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/build/CMakeFiles /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/build/CMakeFiles/progress.marks
+	$(MAKE) -f CMakeFiles/Makefile2 all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4 && $(MAKE) -f CMakeFiles/Makefile2 math/clean
+	$(MAKE) -f CMakeFiles/Makefile2 clean
 .PHONY : clean
 
 # The main clean target
@@ -97,60 +97,71 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4 && $(MAKE) -f CMakeFiles/Makefile2 math/preinstall
+	$(MAKE) -f CMakeFiles/Makefile2 preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4 && $(MAKE) -f CMakeFiles/Makefile2 math/preinstall
+	$(MAKE) -f CMakeFiles/Makefile2 preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4 && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-# Convenience name for target.
-math/CMakeFiles/libmath.dir/rule:
-	cd /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4 && $(MAKE) -f CMakeFiles/Makefile2 math/CMakeFiles/libmath.dir/rule
-.PHONY : math/CMakeFiles/libmath.dir/rule
+#=============================================================================
+# Target rules for targets named app
 
-# Convenience name for target.
-libmath: math/CMakeFiles/libmath.dir/rule
+# Build rule for target.
+app: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 app
+.PHONY : app
 
+# fast build rule for target.
+app/fast:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
+.PHONY : app/fast
+
+#=============================================================================
+# Target rules for targets named libmath
+
+# Build rule for target.
+libmath: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 libmath
 .PHONY : libmath
 
 # fast build rule for target.
 libmath/fast:
-	cd /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4 && $(MAKE) -f math/CMakeFiles/libmath.dir/build.make math/CMakeFiles/libmath.dir/build
+	$(MAKE) -f math/CMakeFiles/libmath.dir/build.make math/CMakeFiles/libmath.dir/build
 .PHONY : libmath/fast
 
-MathFunction.o: MathFunction.c.o
+main.o: main.c.o
 
-.PHONY : MathFunction.o
+.PHONY : main.o
 
 # target to build an object file
-MathFunction.c.o:
-	cd /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4 && $(MAKE) -f math/CMakeFiles/libmath.dir/build.make math/CMakeFiles/libmath.dir/MathFunction.c.o
-.PHONY : MathFunction.c.o
+main.c.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/main.c.o
+.PHONY : main.c.o
 
-MathFunction.i: MathFunction.c.i
+main.i: main.c.i
 
-.PHONY : MathFunction.i
+.PHONY : main.i
 
 # target to preprocess a source file
-MathFunction.c.i:
-	cd /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4 && $(MAKE) -f math/CMakeFiles/libmath.dir/build.make math/CMakeFiles/libmath.dir/MathFunction.c.i
-.PHONY : MathFunction.c.i
+main.c.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/main.c.i
+.PHONY : main.c.i
 
-MathFunction.s: MathFunction.c.s
+main.s: main.c.s
 
-.PHONY : MathFunction.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-MathFunction.c.s:
-	cd /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4 && $(MAKE) -f math/CMakeFiles/libmath.dir/build.make math/CMakeFiles/libmath.dir/MathFunction.c.s
-.PHONY : MathFunction.c.s
+main.c.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/main.c.s
+.PHONY : main.c.s
 
 # Help Target
 help:
@@ -160,10 +171,11 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... app"
 	@echo "... libmath"
-	@echo "... MathFunction.o"
-	@echo "... MathFunction.i"
-	@echo "... MathFunction.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 
@@ -175,6 +187,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/yzy/dev/yzy_workspaces/my-cmake-demo/Demo4 && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
