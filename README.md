@@ -2,10 +2,10 @@
 ## 一.使用流程
 1. 创建工程Demo
 2. 在目录中编写CMakeLists.txt文件
-3. 在Demo中创建目录build
-4. 进入build目录,执行cmake ../生成makefile文件,执行make生成可执行文件  
+3. 在Demo中创建目录build
+4. 进入build目录,执行cmake ../生成makefile文件,执行make生成可执行文件  
 
-*备注:之所以在build文件中执行cmake是为了将产生的所有中间文件都统一输出在build文件中,避免污染源文件,方便清理,这中方式叫外部构建,内部构建就是直接cmake .不创建build目录*
+*备注:之所以在build文件中执行cmake是为了将产生的所有中间文件都统一输出在build文件中,避免污染源文件,方便清理,这中方式叫外部构建,内部构建就是直接cmake .不创建build目录*
 ## 二.CMAKE基础知识
 ```cmake
 #第一行要写cmake最低版本要求
@@ -19,37 +19,37 @@ project (Demo)
 #当project ()方法执行后就会创建两个全局变量,源文件目录名和二进制目录名
 #以CMAKE\PROJECT\工程名打头都可以,结果是一样的
 #内部构建时都指向Demo目录,外部构建二进制目录就指向外部构建目录build
-message ("源文件目录:"${CMAKE_SOURCE_DIR})
-message ("源文件目录:"${PROJECT_SOURCE_DIR})
-message ("源文件目录:"${Demo_SOURCE_DIR})
-message ("二进制文件目录:"${CMAKE_BINARY_DIR})
-message ("二进制文件目录:"${PROJECT_BINARY_DIR})
-message ("二进制文件目录:"${Demo_BINARY_DIR})
+message ("源文件目录:"${CMAKE_SOURCE_DIR})
+message ("源文件目录:"${PROJECT_SOURCE_DIR})
+message ("源文件目录:"${Demo_SOURCE_DIR})
+message ("二进制文件目录:"${CMAKE_BINARY_DIR})
+message ("二进制文件目录:"${PROJECT_BINARY_DIR})
+message ("二进制文件目录:"${Demo_BINARY_DIR})
 
-#为变量赋值,参数一:变量名,参数二变量值
+#为变量赋值,参数一:变量名,参数二变量值
 set (var_name var_value)
 
-#获取指定路径下的所有源文件,参数一:指定路径,参数二:用以接收所有文件名的变量
+#获取指定路径下的所有源文件,参数一:指定路径,参数二:用以接收所有文件名的变量
 aux_sourcr_directory(path_name var_name)
 
 #生成可执行文件,参数一:生成的可执行文件名,参数二:编译所需的所有源文件名
-#多个源文件用空格分开,分号分开,双引号包住分开都是可以的
-#结合aux_sourcr_directory(. SRCS),可以写成add_executable (exe_name ${SRCS})
+#多个源文件用空格分开,分号分开,双引号包住分开都是可以的
+#结合aux_sourcr_directory(. SRCS),可以写成add_executable (exe_name ${SRCS})
 add_executable (exe_name src_name)
 
 #生成库文件,参数一:生成的库名,参数二:库类型,参数三:该库默认不会被编译,一般不用这个参数,参数四:所需源文件
 add_library (lib_name [SHARED|STATIC|MODULE] [EXCLUDE_FROM_ALL] srcs)
 
-#为当前工程Demo添加头文件目录,参数一:添加在前还是后,默认就是后,参数二:作为系统包含路径处理,一般不写,参数三就是要添加的头文件目录路径
+#为当前工程Demo添加头文件目录,参数一:添加在前还是后,默认就是后,参数二:作为系统包含路径处理,一般不写,参数三就是要添加的头文件目录路径
 include_directories ([AFTER|BEFORE] [SYSTEM] dirs)
 
-#为指定工程添加头文件目录,一般是为子工程添加,参数一就是指定工程名,参数四:一般用PUBLIC
+#为指定工程添加头文件目录,一般是为子工程添加,参数一就是指定工程名,参数四:一般用PUBLIC
 target_include_directories (target_name [SYSTEM] [AFTER|BEFORE] <PUBLIC|PRIVATE|INTERFACE> dirs)
 
 #为当前工程链接库,参数是库文件的全路径,记住是全路径,所以并不常用
 link_libraries (lib_path)
 
-#为指定目标链接库,参数一:目标exe_name,参数二:库名,不需全路径
+#为指定目标链接库,参数一:目标exe_name,参数二:库名,不需全路径
 #如:target_link_libraries(app libmath)
 target_link_libraries (target lib_name)
 
@@ -98,7 +98,7 @@ elseif(b)
 else(c)
     cmd3
 endif(a)
-#非真:空,0,N,NO,OFF,FALSE,NOTFOUND
+#非真:空,0,N,NO,OFF,FALSE,NOTFOUND
 #真:非空,1,Y,YES,ON,TRUE等等
 #非:not
 
@@ -122,7 +122,7 @@ IF (var1 STRLESS var2) #var1字母顺序小于var2为真
 IF (var1 STRGREATER var2) #var1字母顺序大于var2为真 
 IF (var1 STREQUAL var2) #var1和var2字母顺序相等为真
 
-#while循环,基本可参考if语句
+#while循环,基本可参考if语句
 while(a)
     cmd
 endwhile(a)
@@ -154,7 +154,7 @@ target_compile_options() #gcc其他的一些编译选项指定，比如-fPIC
 ## 宏和函数
 ```cmake
 #cmake中可以定义函数function和宏micro,这里的宏不是c中的宏,暂且叫宏函数吧
-#function和micro最大的区别在于里面的变量,function内部的变量外部访问不到,而micro里面的变量是全局的
+#function和micro最大的区别在于里面的变量,function内部的变量外部访问不到,而micro里面的变量是全局的
 #定义一个function
 function(testFun)
     set(var_fun "i am fun")    
@@ -166,7 +166,7 @@ endmacro(testMacro)
 #调用函数和宏函数
 testFun()
 testMacro()
-message(fun---->${var_fun})#为空,因为访问不到var_fun
+message(fun---->${var_fun})#为空,因为访问不到var_fun
 message(macro---->${var_macro})#不为空,访问到了
 
 ```
