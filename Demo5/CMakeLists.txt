@@ -52,14 +52,16 @@ target_link_libraries(app libmath)
 
 set(EXECUTABLE_OUTPUT_PATH "/users/yzy/")
 
-foreach(src ${SRCS})
-    message(src--->${src})
-endforeach()
-message(结束循环)
+find_package(BZip2 REQUIRED)
+if(BZIP2_FOUND)
+    message("找到了")
+    message("--->"${CMAKE_MODULE_PATH})
+    message("--->"${BZip2_INCLUDE_DIRS})
+    message("--->"${BZip2_INCLUDES})
+endif(BZIP2_FOUND)
 
-foreach(var RANGE 0 100)
-    message(${var})
-endforeach(var RANGE 100 10)
+
+
 
 
 

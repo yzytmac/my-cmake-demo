@@ -142,7 +142,7 @@ foreach(var RANGE 0 100 10)
     message(${var})
 endforeach(var RANGE 0 100 10)
 ```
-## 构建范围及属性
+## 四.构建范围及属性
 ```cmake
 target_include_directories() #Include的头文件的查找目录，也就是Gcc的[-Idir...]选项
 target_compile_definitions() #通过命令行定义的宏变量
@@ -151,7 +151,7 @@ target_compile_options() #gcc其他的一些编译选项指定，比如-fPIC
 #以上的额三个命令会生成INCLUDE_DIRECTORIES, COMPILE_DEFINITIONS, COMPILE_OPTIONS变量的值或者INTERFACE_INCLUDE_DIRECTORIES,INTERFACE_COMPILE_DEFINITIONS,INTERFACE_COMPILE_OPTIONS的值.
 #这三个命令都有三种可选模式: PRIVATE, PUBLIC。 INTERFACE. PRIVATE模式仅填充 不是接口的目标属性; INTERFACE模式仅填充接口目标的属性.PUBLIC模式填充这两种 的目标属性。
 ```
-## 宏和函数
+## 五.宏和函数
 ```cmake
 #cmake中可以定义函数function和宏micro,这里的宏不是c中的宏,暂且叫宏函数吧
 #function和micro最大的区别在于里面的变量,function内部的变量外部访问不到,而micro里面的变量是全局的
@@ -169,4 +169,85 @@ testMacro()
 message(fun---->${var_fun})#为空,因为访问不到var_fun
 message(macro---->${var_macro})#不为空,访问到了
 
+```
+## 六.其他文件交互
+```cmake
+#将外部input文件拷贝到output文件中
+configure_file(<input> <output> [COPYONLY] [ESCAPE_QUOTES] [@ONLY] [NEWLINE_STYLE [UNIX|DOS|WIN32|LF|CRLF]])
+#COPYONLY：只拷贝文件，不进行任何的变量替换。这个选项在指定了 NEWLINE_STYLE 选项时不能使用（无效）。 
+#ESCAPE_QUOTES：躲过任何的反斜杠(C风格)转义。
+
+注：躲避转义，比如你有个变量在CMake中是这样的 set(FOO_STRING "\"foo\"") 那么在没有 ESCAPE_QUOTES 选项的状态下，通过变量替换将变为 ""foo""，如果指定了 ESCAPE_QUOTES 选项，变量将不变。
+
+#@ONLY：限制变量替换，让其只替换被 @VAR@ 引用的变量（那么 ${VAR} 格式的变量将不会被替换）。这在配置 ${VAR} 语法的脚本时是非常 有用的。 
+#NEWLINE_STYLE <style>：指定输出文件中的新行格式。
+#UNIX 和 LF 的新 行是 \n ，DOS 和 WIN32 和 CRLF 的新行格式是 \r\n 。 这个选项在指定了 COPYONLY 选项时不能使用（无效）。
+
+#读写文件
+#将字符串写入文件名为filename的文件中
+file(WRITE filename "this is content")
+#WRITE选项会写一条消息到名为filename中，如果文件存在，则会覆 盖原文件，如果文件不存在，他将创建该文件 
+#APPEND选项和WRITE选项一样，只是APPEND会写到文件的末尾 
+file(READ filename variable [LIMIT numBytes] [OFFSET offset] [HEX]) 
+#READ选项会将读取的文件内容存放到变量variable，读取numBytes个字节，从offset位置开始，如果指定了[HEX]参数，二进制代码就会转换为 十六进制的转换方式 
+
+file(STRINGS filename variable [LIMIT_COUNT num] [LIMIT_INPUT numBytes] [LIMIT_OUTPUT numBytes] [LENGTH_MINIMUM numBytes] [LENGTH_MAXIMUM numBytes] [NEWLINE_CONSUME] [REGEX regex] [NO_HEX_CONVERSION])
+#STRINGS标志，将会从一个文件中将ASCII字符串的list解析出来，然后储存在variable变量中，文件中的二进制数据将会被忽略，回车换行符会 被忽略（可以设置NO_HEX_CONVERSION选项来禁止这个功能）。
+#LIMIT_COUNT：设定了返回字符串的最大数量；LIMIT_INPUT：设置了从 输入文件中读取的最大字节数；LIMIT_OUTPUT：设置了在输出变量中允许 存储的最大字节数；LENGTH_MINIMUM：设置了返回字符串的最小长度， 小于该长度的字符串将会被忽略；LENGTH_MAXIMUM设置了返回字符串 的最大长度，大于该长度的字符串将会被忽略；NEWLINE_CONSUME：该 标志允许新行被包含到字符串中，而不是终止他们；REGEX：指定了返回的 字符串必须满足的正则表达式 典型的使用方式：file(STRINGS myfile.txt myfile) 该命令在变量myfile中储存了一个list,该list每一项是myfile.txt中的一行文本 file(GLOB variable [RELATIVE path] [globbing expressions]...) 解释：GLOB：该选项将会为所有匹配表达式的文件生成一个文件list，并将 该list存放在variable 里面，文件名的查询表达式和正则表达式类似， 查询表达式的例子：①*.cpp -匹配所有后缀是.cpp的文件②*.vb? -匹配文件 后缀是.vba——.vbz的文件③f[3-5].txt ：匹配f3.txt,f4.txt,f5.txt文件 file(GLOB_RECURSE variable [RELATIVE path] [FOLLOW_SYMLINKS] [globbing expressions]...) 解释：GLOB_RECURSE会生成一个类似于通常GLOB选项的list，不过该选项 可以递归查找文件中的匹配项 比如：/dir/*.py -就会匹配所有在/dir文件下面的python文件， file(RENAME <oldname> <newname>) 解释：RENAME选项对同一个文件系统下的一个文件或目录重命名 file(REMOVE [file1 ...]) 解释：REMOVE选项将会删除指定的文件，包括在子路径下的文件 file(REMOVE_RECURSE [file1 ...]) 解释：REMOVE_RECURSE选项会删除给定的文件以及目录，包括非空目录 file(MAKE_DIRECTORY [directory1 directory2 ...]) 解释：MAKE_DIRECTORY选项将会创建指定的目录，如果它们的父目录不 存在时，同样也会创建 file(RELATIVE_PATH variable directory file) 解释：RELATIVE_PATH选项会确定从direcroty参数到指定文件的相对路 径，然后存到变量variable中 file(TO_CMAKE_PATH path result) 解释：TO_CMAKE_PATH选项会把path转换为一个以unix的/开头的cmake风格的路径
+
+file(TO_NATIVE_PATH path result)
+#TO_NATIVE_PATH选项与TO_CMAKE_PATH选项很相似，但是它会把cmake风格的路径转换为本地路径风格
+
+file(DOWNLOAD url file [TIMEOUT timeout] [STATUS status] [LOG log] [EXPECTED_MD5 sum] [SHOW_PROGRESS])
+#DOWNLOAD将给定的url下载到指定的文件中，如果指定了LOG log，下载的日志将会被输出到log中，如果指定了STATUS status选项下载 操作的状态就会被输出到status里面，该状态的返回值是一个长度为2的 list，list第一个元素是操作的返回值，是一个数字 ，第二个返回值是错误的 字符串，错误信息如果是0，就表示没有错误；如果指定了TIMEOUT time选 项，time秒之后，操作就会推出。如果指定了EXPECTED_MD5 sum选项， 下载操作会认证下载的文件的实际MD5和是否与期望值相匹配，如果不匹 配，操作将返回一个错误；如果指定了SHOW_PROGRESS，进度信息会被 打印出来，直到操作完成
+```
+
+## 七.CMake中的模块和库
+```cmake
+#cmake中有很多内置模块,就像Android中的module,库就是module中的jar包或aar这样理解
+#一般模块名就是在库名前加Find,如BZip2库,模块名就是FindBZip2
+cmake --help-module-list #列出cmake中自带的模块
+
+#使用库,用find_package(库名)函数
+find_package(NAME [一些其他选项])
+<NAME>_FOUND#找到
+<NAME>_INCLUDE_DIRS
+<NAME>_INCLUDES
+<NAME>_LIBRARIES
+<NAME>_LIBRARIES
+<NAME>_LIBS
+<NAME>_DEFINITIONS
+
+#如:
+find_package(BZip2)
+if(BZIP2_FOUND)
+    message("找到了")
+endif(BZIP2_FOUND)
+
+
+
+
+
+
+
+CMAKE_MODULE_PATH
+
+
+
+
+```
+
+
+## 八.其他命令
+```cmake
+#执行系统命令,参数一固定,参数二命令名称,后面还有很多参数l懒得解释了
+execute_process(COMMAND cmd_name)
+
+#查找链接库
+find_package()
+
+#配置默认参数
+#创建个参数设置默认值为ON
+option(USE_MYLIB "描述" ON)
+option(INIT_VAR "描述" 0)
 ```
